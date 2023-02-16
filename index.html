@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+    </head>
+    <body>
+        <div x-data="grid_data">
+            <table>
+                <thead>
+                <tr>
+                    <template x-for="i, idx in grid" :key="idx">
+                        <th x-text="idx"></th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template x-for="i, idx in grid" :key="idx">
+                    <tr>
+                        <template x-for="j, jdx in i" :key="jdx">
+                            <td>
+                                <textarea
+                                    type="text"
+                                    x-model="grid[idx][jdx]"
+                                    class="border w-24 border-gray-300 p-0 resize-none"
+                                    x-on:input="on_paste(jdx, idx, $event.target.value)"
+                                    rows="1"
+                                    x-on:focus="$event.target.select()"
+                                ></textarea>
+                            </td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+            </table>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
